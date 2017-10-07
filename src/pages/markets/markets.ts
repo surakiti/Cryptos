@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GetApiCryptoProvider , cryptoNumbers ,cryto ,orderbook ,asks , bids , NAME} from '../../providers/get-api-crypto/get-api-crypto';
 import _ from 'lodash';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController ,ItemSliding } from 'ionic-angular';
 /**
  * Generated class for the MarketsPage page.
  *
@@ -18,6 +18,7 @@ export class MarketsPage {
 	cryptoNumbers:cryto[];
 	THB:cryto[];
 	BTC:cryto[];
+  testing:string='thb';
   isSelect:boolean;
   crytoName:any[]=NAME;
   cryptoMix:any[]=[{pairing_id:'',

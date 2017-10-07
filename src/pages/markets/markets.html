@@ -14,8 +14,8 @@
     
   </ion-navbar>
  <!-- <ion-toolbar no-border-top color="dark"> -->
-    <ion-segment color="danger" >
-      <ion-segment-button   start value="thb" (click)="selectThb()" >
+    <ion-segment color="danger" [(ngModel)]="testing" >
+      <ion-segment-button   value="thb"  (click)="selectThb()" >
         THB
       </ion-segment-button>
       <ion-segment-button value="btc" (click)="selectBtc()">
@@ -31,10 +31,30 @@
 
 
 <ion-content padding class="dark">
-	<!-- <span >Name</span> -->
 	
 
-	<ion-list *ngIf="!isSelect" style="margin-top:-17px">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    	<ion-list *ngIf="!isSelect" style="margin-top:-17px">
 		
  		<ion-item *ngFor="let crypto of THB"  class="dark">
 
@@ -62,6 +82,98 @@
 
 		</ion-item>
 	</ion-list>
+
+===================================================================================
+
+	<ion-list *ngIf="isSelect" style="margin-top:-17px" >
+		<span></span>
+ 		<ion-item *ngFor="let crypto of BTC" class="dark">
+ 			<ion-avatar item-start>
+			<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
+							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
+						
+				<span class="Green" >
+						<span [ngClass]="{rateCurrency:crypto.change<0}">
+							{{crypto.last_price}}
+										
+						</span>
+				</span>
+
+						<br>
+			<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
+						<p class="Green">
+								<span [ngClass]="{rateCurrency:crypto.change<0}">
+											{{crypto.change}}%
+								</span>
+						</p>
+							
+										
+ 		</ion-item>
+ 	</ion-list>
+    </ion-refresher-content>
+  </ion-refresher> -->
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<ion-list *ngIf="!isSelect" style="margin-top:-17px">
+		<ion-item-sliding #slidingItem >
+			<ion-item *ngFor="let crypto of THB"  class="dark">
+				
+				<ion-avatar item-start>
+				<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
+						
+							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
+							
+					<span class="Green">
+							<span [ngClass]="{rateCurrency:crypto.change<0}">
+									<span class="letfs">{{crypto.last_price}}</span>
+									
+							</span>
+					</span>
+
+								<br>
+
+					<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
+
+								<p class="Green" >
+									<span [ngClass]="{rateCurrency:crypto.change<0}">
+											{{crypto.change}}%
+										</span>
+								</p>
+
+					
+
+
+	 	 	</ion-item>
+
+	 	 	<ion-item-options side="right" class="dark">
+			 	 		<button ion-button icon-only (click)="markDone(slidingItem,task)" color="secondary">
+			 	 			<ion-icon name="checkmark"></ion-icon>
+			 	 		</button>
+		 	 		</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+
 
 <!-- =================================================================================== -->
 

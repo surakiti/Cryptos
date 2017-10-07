@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http' ;
 import { FormsModule } from '@angular/forms';
 
 import { MarketsPage } from '../pages/markets/markets';
-import { AccountPage } from '../pages/account/account';
+import { FavoritePage } from '../pages/favorite/favorite';
+import { ChatPage } from '../pages/chat/chat';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,8 +18,9 @@ import { GetApiCryptoProvider } from '../providers/get-api-crypto/get-api-crypto
   declarations: [
     MyApp,
     MarketsPage,
-    AccountPage,
-    TabsPage
+    FavoritePage,
+    TabsPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -29,9 +31,10 @@ import { GetApiCryptoProvider } from '../providers/get-api-crypto/get-api-crypto
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-     MarketsPage,
-    AccountPage,
-    TabsPage
+    MarketsPage,
+    FavoritePage,
+    TabsPage,
+    ChatPage
   ],
   providers: [
     StatusBar,

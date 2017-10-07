@@ -17,12 +17,22 @@ for (let i = 1 ; i <= 27; i++) {
 	num=[i];
 }
 
+
+
 @Injectable()
 export class GetApiCryptoProvider {
  
+// imgeUrl : string = 'https://d2v7vc3vnopnyy.cloudfront.net/img/coins';
+
+	// nameCrypto:any[]=["Bitcoin","Litecoin","Namecoin","Dogcoin",
+	// 				"Peercoin","Feathercoin","Primecoin","Zcash",
+	// 				"HyperStake","Pandacoin","Cryptonite","Paycoin",
+	// 				"Quark","Ethereum","Ethereum","Dash","Augur","Gnosis",
+	// 				"Ripple","OmiseGo","BitcoinCash"];
+
   constructor(public http: Http) {
 
-    console.log('Hello GetApiCryptoProvider Provider');
+  console.log('Hello GetApiCryptoProvider Provider');
 
   }
 
@@ -52,12 +62,21 @@ export class cryto{
 	pairing_id:any
 	primary_currency:any
 	secondary_currency:any
-	change:any
-	last_price:any
+	change:number
+	last_price:string
 	volume_24hours:any
+	// nameCrypto:any[]
 	orderbooks:orderbook[]
+
 }
 export class cryptoNumbers{
 	// number:string='1';
 	crytos:cryto[]
 }
+
+export const NAME:any[] = ["Bitcoin","Litecoin","Namecoin","Dogcoin",
+					"Peercoin","Feathercoin","Primecoin","Zcash",
+					"HyperStake","Pandacoin","Cryptonite","Paycoin",
+					"Quark","Ethereum","Ethereum","Dash","Augur","Gnosis",
+					"Ripple","OmiseGo","BitcoinCash"];
+

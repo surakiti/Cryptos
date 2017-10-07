@@ -5,79 +5,91 @@
   Ionic pages and navigation.
 -->
 <ion-header style="text-align: center;">
-  <ion-navbar color="dark">
-    <ion-title style="color:white">markets</ion-title>
+  
+  <ion-navbar color="dark" >
+  	
+
+    <ion-title >Markets</ion-title>
+   
+    
   </ion-navbar>
-  <span >
-		<button  ion-button icon-start (click)="selectThb()" >THB</button>
-     	<button ion-button outline icon-start style="color:white" (click)="selectBtc()" >BTC</button>
-    </span>
+ <!-- <ion-toolbar no-border-top color="dark"> -->
+    <ion-segment color="danger" >
+      <ion-segment-button   start value="thb" (click)="selectThb()" >
+        THB
+      </ion-segment-button>
+      <ion-segment-button value="btc" (click)="selectBtc()">
+        BTC
+      </ion-segment-button>
+    </ion-segment>
+<!-- </ion-toolbar> -->
+
 </ion-header>
 
 
 
 
-<ion-content padding style="background-color:#2E2E2E">
+
+<ion-content padding class="dark">
 	<!-- <span >Name</span> -->
-<<<<<<< HEAD
 	
 
-	<ion-list *ngIf="!isSelect">
- 		<ion-item *ngFor="let cryptoNumber of THB" style="background-color:#2E2E2E;color: white" >
-=======
-	<span style="text-align: center;">
-		<button  ion-button icon-start (click)="selectThb()" >THB</button>
-    	<button ion-button outline icon-start style="color:white" (click)="selectBtc()" >BTC</button>
-    </span>
-	<ion-list *ngIf="!isSelect">
-		<ion-item *ngFor="let cryptoNumber of THB" style="background-color:#2E2E2E;color: white" >
->>>>>>> d13b86bf25b7a29fb3fdab376851cdd360a03d8f
-			
-					<span style="font-size:15px;"*ngIf="cryptoNumber">	 
-						{{ cryptoNumber.secondary_currency }}
-						<span end style="padding:9em;font-size:10px " >
-							<span style="color:#3ADF00">
-							{{ cryptoNumber.last_price }}
-							</span> 
-							{{cryptoNumber.primary_currency}}
+	<ion-list *ngIf="!isSelect" style="margin-top:-17px">
+		
+ 		<ion-item *ngFor="let crypto of THB"  class="dark">
+
+			<ion-avatar item-start>
+			<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
+					
+						{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
+						
+				<span class="Green">
+						<span [ngClass]="{rateCurrency:crypto.change<0}">
+								<span class="letfs">{{crypto.last_price}}</span>
+								
 						</span>
-					</span>
+				</span>
+
+							<br>
+
+				<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
+
+							<p class="Green" >
+								<span [ngClass]="{rateCurrency:crypto.change<0}">
+										{{crypto.change}}%
+									</span>
+							</p>
+
 		</ion-item>
-<<<<<<< HEAD
 	</ion-list>
 
-	<ion-list *ngIf="isSelect">
- 		<ion-item *ngFor="let cryptoNumber of BTC" style="background-color:#2E2E2E;color: white" >
- 			
- 				<span style="font-size:15px;"*ngIf="cryptoNumber">	 
- 						{{ cryptoNumber.secondary_currency }}
- 					<span end style="padding:9em;font-size:10px " >
- 							<span style="color:#3ADF00">
- 							{{ cryptoNumber.last_price }}
- 							</span> 
- 							{{cryptoNumber.primary_currency}}
- 						</span>
- 					</span>
+<!-- =================================================================================== -->
+
+	<ion-list *ngIf="isSelect" style="margin-top:-17px" >
+		<span></span>
+ 		<ion-item *ngFor="let crypto of BTC" class="dark">
+ 			<ion-avatar item-start>
+			<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
+							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
+						
+				<span class="Green" >
+						<span [ngClass]="{rateCurrency:crypto.change<0}">
+							{{crypto.last_price}}
+										
+						</span>
+				</span>
+
+						<br>
+			<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
+						<p class="Green">
+								<span [ngClass]="{rateCurrency:crypto.change<0}">
+											{{crypto.change}}%
+								</span>
+						</p>
+							
+										
  		</ion-item>
  	</ion-list>
 
-=======
-	</ion-list>
 
-	<ion-list *ngIf="isSelect">
-		<ion-item *ngFor="let cryptoNumber of BTC" style="background-color:#2E2E2E;color: white" >
-			
-					<span style="font-size:15px;"*ngIf="cryptoNumber">	 
-						{{ cryptoNumber.secondary_currency }}
-						<span end style="padding:9em;font-size:10px " >
-							<span style="color:#3ADF00">
-							{{ cryptoNumber.last_price }}
-							</span> 
-							{{cryptoNumber.primary_currency}}
-						</span>
-					</span>
-		</ion-item>
-	</ion-list>
-
->>>>>>> d13b86bf25b7a29fb3fdab376851cdd360a03d8f
 </ion-content>

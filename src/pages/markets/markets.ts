@@ -27,6 +27,7 @@ export class MarketsPage {
   		// 	let number = this.cryptoNumbers[i];
   		// 	console.dir('Number :' + number);
   		// } E-เตี้ยยยยยย testttttt2
+      // ไม่ทำและแมงงงง
   }
 
   ionViewDidLoad() {

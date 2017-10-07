@@ -19,10 +19,19 @@
 
 <ion-content padding style="background-color:#2E2E2E">
 	<!-- <span >Name</span> -->
+<<<<<<< HEAD
 	
 
 	<ion-list *ngIf="!isSelect">
  		<ion-item *ngFor="let cryptoNumber of THB" style="background-color:#2E2E2E;color: white" >
+=======
+	<span style="text-align: center;">
+		<button  ion-button icon-start (click)="selectThb()" >THB</button>
+    	<button ion-button outline icon-start style="color:white" (click)="selectBtc()" >BTC</button>
+    </span>
+	<ion-list *ngIf="!isSelect">
+		<ion-item *ngFor="let cryptoNumber of THB" style="background-color:#2E2E2E;color: white" >
+>>>>>>> d13b86bf25b7a29fb3fdab376851cdd360a03d8f
 			
 					<span style="font-size:15px;"*ngIf="cryptoNumber">	 
 						{{ cryptoNumber.secondary_currency }}
@@ -34,6 +43,7 @@
 						</span>
 					</span>
 		</ion-item>
+<<<<<<< HEAD
 	</ion-list>
 
 	<ion-list *ngIf="isSelect">
@@ -51,4 +61,23 @@
  		</ion-item>
  	</ion-list>
 
+=======
+	</ion-list>
+
+	<ion-list *ngIf="isSelect">
+		<ion-item *ngFor="let cryptoNumber of BTC" style="background-color:#2E2E2E;color: white" >
+			
+					<span style="font-size:15px;"*ngIf="cryptoNumber">	 
+						{{ cryptoNumber.secondary_currency }}
+						<span end style="padding:9em;font-size:10px " >
+							<span style="color:#3ADF00">
+							{{ cryptoNumber.last_price }}
+							</span> 
+							{{cryptoNumber.primary_currency}}
+						</span>
+					</span>
+		</ion-item>
+	</ion-list>
+
+>>>>>>> d13b86bf25b7a29fb3fdab376851cdd360a03d8f
 </ion-content>

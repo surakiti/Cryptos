@@ -26,7 +26,7 @@ export class MarketsPage {
   		// for(let i=0;i<27;i++){
   		// 	let number = this.cryptoNumbers[i];
   		// 	console.dir('Number :' + number);
-  		// } E-เตี้ยยยยยยยยยยยยยยยยยยยยยยยยย111
+  		// } E-เตี้ยยยยยย testttttt2
   }
 
   ionViewDidLoad() {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GetApiCryptoProvider , cryptoNumbers ,cryto ,orderbook ,asks , bids , NAME} from '../../providers/get-api-crypto/get-api-crypto';
 import _ from 'lodash';
-import { LoadingController ,ItemSliding } from 'ionic-angular';
+import { LoadingController ,ItemSliding ,AlertController } from 'ionic-angular';
 /**
  * Generated class for the MarketsPage page.
  *
@@ -29,7 +29,7 @@ export class MarketsPage {
                     volume_24hours:'',
                     nameCrypto:'',
                     orderbooks:''}];
-  constructor(public loadingCtrl: LoadingController,public getCrypto :GetApiCryptoProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController,public loadingCtrl: LoadingController,public getCrypto :GetApiCryptoProvider,public navCtrl: NavController, public navParams: NavParams) {
   		this.getCrypto.loadBX().subscribe( data => { this.cryptoNumbers = Object.keys(data).map(key => data[key]) ;
     										console.dir(this.cryptoNumbers)},
   									  error => {console.log("error: "+error);},
@@ -59,7 +59,7 @@ export class MarketsPage {
                           volume_24hours:this.cryptoNumbers[i].volume_24hours,
                           nameCrypto:this.cryptoName[i],
                           orderbooks:this.cryptoNumbers[i].orderbooks}
-      console.log('Sussess '+i+'----- name :'+this.cryptoMix[i].nameCrypto);
+      console.log('Success '+i+'----- name :'+this.cryptoMix[i].nameCrypto);
     }
   }
 
@@ -79,6 +79,18 @@ export class MarketsPage {
                                       orderbooks:crypto.orderbooks}) ;
     console.log('addFavorite : '+crypto.nameCrypto);
     slidingItem.close();
+
+    let success = this.alertCtrl.create({
+        title: 'Successful!',
+        subTitle: 'Save " '+crypto.secondary_currency+'" in your favorites',
+    });
+
+    success.present().then(()=>{
+      setTimeout(() => {success.dismiss()}, 800)
+    }).catch(()=>{
+       success.dismiss();
+    });
+    
   }
 
   presentLoading() {

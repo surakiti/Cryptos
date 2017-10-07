@@ -136,8 +136,8 @@
 
 
 	<ion-list *ngIf="!isSelect" style="margin-top:-17px">
-		<ion-item-sliding #slidingItem >
-			<ion-item *ngFor="let crypto of THB"  class="dark">
+		<ion-item-sliding #slidingItem *ngFor="let crypto of THB">
+			<ion-item class="dark">
 				
 				<ion-avatar item-start>
 				<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
@@ -161,13 +161,10 @@
 										</span>
 								</p>
 
-					
-
-
 	 	 	</ion-item>
 
 	 	 	<ion-item-options side="right" class="dark">
-			 	 		<button ion-button icon-only (click)="markDone(slidingItem,task)" color="secondary">
+			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" color="secondary">
 			 	 			<ion-icon name="checkmark"></ion-icon>
 			 	 		</button>
 		 	 		</ion-item-options>

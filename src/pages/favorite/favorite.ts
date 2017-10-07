@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { GetApiCryptoProvider} from '../../providers/get-api-crypto/get-api-crypto';
 
 /**
  * Generated class for the FavoritePage page.
@@ -13,8 +14,9 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'favorite.html',
 })
 export class FavoritePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+favoriteCryptos:any[];
+  constructor(public getCrypto :GetApiCryptoProvider,public navCtrl: NavController, public navParams: NavParams) {
+  	this.favoriteCryptos = getCrypto.getFavoriteCrypto();
   }
 
   ionViewDidLoad() {

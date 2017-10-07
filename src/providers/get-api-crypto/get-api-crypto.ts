@@ -19,9 +19,9 @@ for (let i = 1 ; i <= 27; i++) {
 
 
 
+
 @Injectable()
 export class GetApiCryptoProvider {
- 
 // imgeUrl : string = 'https://d2v7vc3vnopnyy.cloudfront.net/img/coins';
 
 	// nameCrypto:any[]=["Bitcoin","Litecoin","Namecoin","Dogcoin",
@@ -29,19 +29,27 @@ export class GetApiCryptoProvider {
 	// 				"HyperStake","Pandacoin","Cryptonite","Paycoin",
 	// 				"Quark","Ethereum","Ethereum","Dash","Augur","Gnosis",
 	// 				"Ripple","OmiseGo","BitcoinCash"];
+	favoriteCrypto:any[]=[] ;
+	constructor(public http: Http) {
 
-  constructor(public http: Http) {
+	console.log('Hello GetApiCryptoProvider Provider');
 
-  console.log('Hello GetApiCryptoProvider Provider');
+	}
 
-  }
+	loadBX():Observable<cryptoNumbers[]>{
+	  	return this.http.get("/api")
+	  			   .map(response => {
+	  			   		return response.json()
+	  			   });
+	}
 
-  loadBX():Observable<cryptoNumbers[]>{
-  	return this.http.get("/api")
-  			   .map(response => {
-  			   		return response.json()
-  			   });
-  }
+	addFavoriteCrypto(cryto: any){
+	    this.favoriteCrypto.push(cryto) ;
+	}
+
+	getFavoriteCrypto(): cryto[] {
+	    return this.favoriteCrypto ;
+	}
 
 }
 export class bids{
@@ -65,9 +73,7 @@ export class cryto{
 	change:number
 	last_price:string
 	volume_24hours:any
-	// nameCrypto:any[]
 	orderbooks:orderbook[]
-
 }
 export class cryptoNumbers{
 	// number:string='1';

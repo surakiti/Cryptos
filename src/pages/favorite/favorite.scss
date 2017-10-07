@@ -1,3 +1,47 @@
 page-favorite {
+  $colors: (
+  primary:    #387ef5,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      orange,
+  dark:       #2E2E2E,
+  orange:      #FF4000
+  );
 
+  .rateCurrency{
+    color:#F78181;
+    float: right;
+  }
+  ion-avatar {
+      font-size: 6px;
+      margin-top: 6px;
+      margin-left: -10em;
+      float: right;
+  }
+
+
+  .Green{
+   color:#A9F5A9;
+   text-align: right;
+   font-size:14px;
+   float: right;
+  }
+  .Orange{
+    color:#FF8000;
+  }
+  .dark{
+
+    color:#2E2E2E;
+    background-color:#2E2E2E;
+    color:white;
+  }
+  .letfs{
+    text-align: right;
+  }
+
+  .nameCoinsSet{
+
+    color:#A4A4A4;
+    font-size:13px;
+  }
 }

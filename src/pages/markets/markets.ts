@@ -20,7 +20,7 @@ export class MarketsPage {
 	BTC:cryto[];
   testing:string='thb';
   isSelect:boolean;
-  crytoName:any[]=NAME;
+  cryptoName:any[]=NAME;
   cryptoMix:any[]=[{pairing_id:'',
                     primary_currency:'',
                     secondary_currency:'',
@@ -57,7 +57,7 @@ export class MarketsPage {
                           change:this.cryptoNumbers[i].change,
                           last_price:this.cryptoNumbers[i].last_price,
                           volume_24hours:this.cryptoNumbers[i].volume_24hours,
-                          nameCrypto:this.crytoName[i],
+                          nameCrypto:this.cryptoName[i],
                           orderbooks:this.cryptoNumbers[i].orderbooks}
       console.log('Sussess '+i+'----- name :'+this.cryptoMix[i].nameCrypto);
     }
@@ -67,6 +67,19 @@ export class MarketsPage {
   //   console.log('ionViewDidLoad MarketsPage');
 
   // }
+
+  addFavorite(slidingItem: ItemSliding, crypto: any){
+    this.getCrypto.addFavoriteCrypto({pairing_id: crypto.pairing_id,
+                                      primary_currency:crypto.primary_currency,
+                                      secondary_currency:crypto.secondary_currency,
+                                      change:crypto.change,
+                                      last_price:crypto.last_price,
+                                      volume_24hours:crypto.volume_24hours,
+                                      nameCrypto:crypto.nameCrypto,
+                                      orderbooks:crypto.orderbooks}) ;
+    console.log('addFavorite : '+crypto.nameCrypto);
+    slidingItem.close();
+  }
 
   presentLoading() {
     let loader = this.loadingCtrl.create({

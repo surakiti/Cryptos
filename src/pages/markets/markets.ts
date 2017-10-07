@@ -14,20 +14,22 @@ import _ from 'lodash';
   templateUrl: 'markets.html',
 })
 export class MarketsPage {
-	cryptoNumbers:cryptoNumbers[];
+	cryptoNumbers:cryto[];
 	THB:cryto[];
 	BTC:cryto[];
+  isSelect:boolean;
 
   constructor(public getCrypto :GetApiCryptoProvider,public navCtrl: NavController, public navParams: NavParams) {
   		this.getCrypto.loadBX().subscribe( data => { this.cryptoNumbers = Object.keys(data).map(key => data[key]) ;
     										console.dir(this.cryptoNumbers)},
   									  error => {console.log("error: "+error);},
-  										  () => {console.log("Read park completely");})
+  										   () => {this.selectThb();
+                          console.log("Read park completely");})
+      this.isSelect=false;
   		// for(let i=0;i<27;i++){
   		// 	let number = this.cryptoNumbers[i];
   		// 	console.dir('Number :' + number);
   		// } E-เตี้ยยยยยย testttttt2
-      // ไม่ทำและแมงงงง
   }
 
   ionViewDidLoad() {
@@ -35,19 +37,40 @@ export class MarketsPage {
 
   }
 
-  SelectThb(){
-  	for(let i=0;i<27;i++){
-  		console.log("sasdas");
-  		//let filter:any[]=this.cryptoNumbers.map(key => this.filter[key])
-  		let filter:cryto[] =this.cryptoNumbers[i].crytos;
-  		console.log('FILTER : '+filter);
-
-  		let thb:any[] = Object.keys(filter).map(key => filter[key]);
-  		console.log('THB : '+thb);
-  		// for(let numbers=this.cryptoNumbers[i];numbers.crytos.length>0;){
-
-  		// }
-  	}
+  selectThb(){
+       if (this.cryptoNumbers.length>-1){
+         let filteredTHB = this.cryptoNumbers.filter( row => { 
+            if (row.primary_currency=='THB') {
+                 return true;
+             }else {
+                 return false ;
+               }
+         });
+         this.isSelect=false;
+         console.log('FilterTHB : '+filteredTHB) ;
+        this.THB = filteredTHB ;
+       }else {
+        console.log('No data') ;
+       }
   }
+
+
+  selectBtc(){
+       if (this.cryptoNumbers.length>-1){
+         let filteredBTC = this.cryptoNumbers.filter( row => { 
+             if (row.primary_currency=='BTC') {
+                 return true;
+             }else {
+                 return false ;
+               }
+         });
+         this.isSelect=true;
+         console.log('FilterBTC : '+filteredBTC) ;
+         this.BTC = filteredBTC ;
+       } else {
+         console.log('No data') ;
+       }
+  }
+  
 }
 

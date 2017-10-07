@@ -8,6 +8,9 @@ page-markets {
 	  }
 	}
 
+.new-background {
+  background-color: #2E2E2E;
+}
 
 
 	.card-background-page {
@@ -33,6 +36,14 @@ page-markets {
     width: 100%;
     color: #fff;
   }
+
+  $colors: (
+  primary:    #387ef5,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #2E2E2E
+);
 
 }
 

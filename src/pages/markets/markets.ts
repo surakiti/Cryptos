@@ -80,17 +80,6 @@ export class MarketsPage {
     console.log('addFavorite : '+crypto.nameCrypto);
     slidingItem.close();
 
-    let success = this.alertCtrl.create({
-        title: 'Successful!',
-        subTitle: 'Save " '+crypto.secondary_currency+'" in your favorites',
-    });
-
-    success.present().then(()=>{
-      setTimeout(() => {success.dismiss()}, 800)
-    }).catch(()=>{
-       success.dismiss();
-    });
-    
   }
 
   presentLoading() {

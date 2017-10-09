@@ -96,7 +96,15 @@ export class GetApiCryptoProvider {
 	    return this.favoriteCrypto ;
 	}
 
+	removeFavoriteCrypto(cryto: crytoWithName){
+		let index = this.favoriteCrypto.indexOf(cryto);
+		if (index > -1){
+			this.favoriteCrypto.splice(index,1);
+		}
+	}
+
 }
+
 export class bids{
 	total:any
 	volume:any

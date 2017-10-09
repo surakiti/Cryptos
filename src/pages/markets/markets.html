@@ -164,8 +164,8 @@
 	 	 	</ion-item>
 
 	 	 	<ion-item-options side="right" class="dark">
-			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" color="secondary">
-			 	 			<ion-icon name="checkmark"></ion-icon>
+			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" style="background:#CC6666">
+			 	 			<ion-icon name="ios-heart"></ion-icon>
 			 	 		</button>
 		 	 		</ion-item-options>
 		</ion-item-sliding>
@@ -175,29 +175,39 @@
 <!-- =================================================================================== -->
 
 	<ion-list *ngIf="isSelect" style="margin-top:-17px" >
-		<span></span>
- 		<ion-item *ngFor="let crypto of BTC" class="dark">
- 			<ion-avatar item-start>
-			<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
-							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
+		<ion-item-sliding #slidingItem *ngFor="let crypto of BTC">
+			<ion-item class="dark">
+				
+				<ion-avatar item-start>
+				<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
 						
-				<span class="Green" >
-						<span [ngClass]="{rateCurrency:crypto.change<0}">
-							{{crypto.last_price}}
-										
-						</span>
-				</span>
-
-						<br>
-			<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
-						<p class="Green">
-								<span [ngClass]="{rateCurrency:crypto.change<0}">
-											{{crypto.change}}%
-								</span>
-						</p>
+							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
 							
-										
- 		</ion-item>
+					<span class="Green">
+							<span [ngClass]="{rateCurrency:crypto.change<0}">
+									<span class="letfs">{{crypto.last_price}}</span>
+									
+							</span>
+					</span>
+
+								<br>
+
+					<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
+
+								<p class="Green" >
+									<span [ngClass]="{rateCurrency:crypto.change<0}">
+											{{crypto.change}}%
+										</span>
+								</p>
+
+	 	 	</ion-item>
+
+	 	 			<ion-item-options side="right" class="dark">
+			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" style="background:#CC6666">
+			 	 			<ion-icon name="ios-heart"></ion-icon>
+			 	 		</button>
+		 	 		</ion-item-options>
+		</ion-item-sliding>
  	</ion-list>
 
 

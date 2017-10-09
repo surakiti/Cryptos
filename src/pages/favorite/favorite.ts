@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,ItemSliding } from 'ionic-angular';
 import { GetApiCryptoProvider} from '../../providers/get-api-crypto/get-api-crypto';
 
 /**
@@ -23,4 +23,10 @@ favoriteCryptos:any[];
     console.log('ionViewDidLoad FavoritePage');
   }
 
+  removeFavorite(slidingItem: ItemSliding, crypto: any){
+    this.getCrypto.removeFavoriteCrypto(crypto) ;
+    console.log('removeFavorite : '+crypto.nameCrypto);
+    slidingItem.close();
+
+  }
 }

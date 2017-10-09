@@ -29,6 +29,17 @@ export class MarketsPage {
                     volume_24hours:'',
                     nameCrypto:'',
                     orderbooks:''}];
+
+
+  isfiltered:boolean=false;
+  filteredCrypto:any=[{pairing_id:'',
+                    primary_currency:'',
+                    secondary_currency:'',
+                    change:'',
+                    last_price:'',
+                    volume_24hours:'',
+                    nameCrypto:'',
+                    orderbooks:''}];
   constructor(public alertCtrl: AlertController,public loadingCtrl: LoadingController,public getCrypto :GetApiCryptoProvider,public navCtrl: NavController, public navParams: NavParams) {
   		this.getCrypto.loadBX().subscribe( data => { this.cryptoNumbers = Object.keys(data).map(key => data[key]) ;
     										console.dir(this.cryptoNumbers)},

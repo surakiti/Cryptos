@@ -8,29 +8,35 @@
   <ion-navbar color="dark" >
     <ion-title>Chats</ion-title>
   </ion-navbar>
-
+  <ion-buttons end>
+ 		<button ion-button icon-left (click)="addTask( )">
+ 	 	 	<ion-icon name="add"></ion-icon> Add Item
+ 		</button>
+ 	</ion-buttons>
 </ion-header>
 
 
 <ion-content padding class="dark">
-	<ion-list >
-		<ion-item *ngFor="let chat of chatting" class="dark">
-			<ion-label style="color:white">
-				<span style="font-size:15px"><b>{{chat.username}} :</b></span> <span class="nameCoinsSet">{{chat.message}} </span>
-			</ion-label>
-		</ion-item>
-	</ion-list>
+		<ion-list no-lines >
+			<ion-item *ngFor="let chat of chatting" class="dark" class="positionChat">
+				<ion-label style="color:white">
+					<span style="font-size:15px"><b>{{chat.username}} :</b></span> <span class="nameCoinsSet">{{chat.message}} </span>
+				</ion-label>
+			</ion-item>
+		</ion-list>
+	
 
 	<!-- <form [formGroup]="sendMessage";"> -->
-
-	<!-- <ion-card>
-	  	<ion-item>
-	  		{{username}} <br>
-	     	<input placeholder="message"[(ngModel)]="message" clearInput/>
-	  		<button ion-button (click)="addChatting(username,message)">Send</button>
-	  	</ion-item>
-	</ion-card> -->
-
-	<ion-searchbar (ionInput)="searchQuotes($event)"></ion-searchbar>
-
 </ion-content>
+<ion-footer>
+	 	<ion-toolbar color="dark">
+	    	<span class="username">{{username}}</span><br>
+		    	<input #input placeholder="Your message.."[(ngModel)]="message" />
+		    	<ion-buttons end (click)="addChatting(username,message)">
+			      	<button>
+			        	<ion-icon name="send"></ion-icon>
+			    	</button>
+	    		</ion-buttons>
+
+  		</ion-toolbar>
+</ion-footer> 

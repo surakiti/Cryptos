@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams,AlertController} from 'ionic-angular';
 // import { FormBuilder, FormGroup ,Validators } from '@angular/forms' 
 import { Content } from 'ionic-angular';
 
@@ -21,7 +21,7 @@ export class ChatPage {
 	chattingNew : chatting[];
 	username:string = 'User1032';
 	message:string;
-  	constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   		this.chatting = [{username:'Sommestake',message:'LOL and merchants revenue also counts, what a scam'}
   						 	]
   		this.chattingNew = [{username:'Glorious King',message:'COSS is beating all odds'},
@@ -66,11 +66,40 @@ export class ChatPage {
 	  		console.log('Username :'+chatArray[n].username);
 	  		oldChat.push({username:chatArray[n].username,message:chatArray[n].message});
 	  		scroll.scrollToBottom(0);
-	  		if (n < chatArray.length-1) setTimeout(function() { fn(++n,oldChat,chatArray,scroll);}, 2000);
+	  		if (n < chatArray.length-1) setTimeout(function() { fn(++n,oldChat,chatArray,scroll);}, 2500);
 		}(0,this.chatting,this.chattingNew,this.content));
 	}
 
+	editUsername(){
+		let prompt = this.alertCtrl.create({
+	      title: 'Edit Username',
+	      message: "Enter a new username for chatting!",
+	      inputs: [
+	        {
+	          name: 'newUsername',
+	          placeholder: 'Your Username'
+	        },
+	      ],
+	      buttons: [
+	        {
+	          text: 'Cancel',
+	          handler: data => {
+	            console.log('Cancel clicked');
+	          }
+	        },
+	        {
+	          text: 'Save',
+	          handler: data => {
+	            console.log('Saved clicked');
+	            this.username = data.newUsername;
+	          }
+	        }
+	      ]
+	    });
 
+	    prompt.present();
+  		}
+	
 }
 
 

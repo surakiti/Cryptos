@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { GetApiCryptoProvider , cryptoNumbers ,cryto ,orderbook ,asks , bids , NAME} from '../../providers/get-api-crypto/get-api-crypto';
+import { GetApiCryptoProvider , cryptoNumbers ,cryto ,orderbook ,asks , bids , NAME,objectCoinMarKetCap} from '../../providers/get-api-crypto/get-api-crypto';
 import _ from 'lodash';
 import { LoadingController ,ItemSliding ,AlertController } from 'ionic-angular';
 /**
@@ -15,38 +15,20 @@ import { LoadingController ,ItemSliding ,AlertController } from 'ionic-angular';
   templateUrl: 'markets.html',
 })
 export class MarketsPage {
-	cryptoNumbers:cryto[];
-	THB:cryto[];
-	BTC:cryto[];
+  cryptoMarketUSDandTHB:objectCoinMarKetCap[];
+
+  decimalPriceCrypto:objectCoinMarKetCap[];
   testing:string='thb';
   isSelect:boolean;
-  cryptoName:any[]=NAME;
-  cryptoMix:any[]=[{pairing_id:'',
-                    primary_currency:'',
-                    secondary_currency:'',
-                    change:'',
-                    last_price:'',
-                    volume_24hours:'',
-                    nameCrypto:'',
-                    orderbooks:''}];
-
-
-  isfiltered:boolean=false;
-  filteredCrypto:any=[{pairing_id:'',
-                    primary_currency:'',
-                    secondary_currency:'',
-                    change:'',
-                    last_price:'',
-                    volume_24hours:'',
-                    nameCrypto:'',
-                    orderbooks:''}];
+  filteredCrypto: objectCoinMarKetCap[]  ;
+  isfiltered: boolean ;
+  
   constructor(public alertCtrl: AlertController,public loadingCtrl: LoadingController,public getCrypto :GetApiCryptoProvider,public navCtrl: NavController, public navParams: NavParams) {
-  		this.getCrypto.loadBX().subscribe( data => { this.cryptoNumbers = Object.keys(data).map(key => data[key]) ;
-    										console.dir(this.cryptoNumbers)},
-  									  error => {console.log("error: "+error);},
-  										   () => {this.addName();
-                                this.selectThb();
-                          console.log("Read park completely");})
+  this.getCrypto.loadCoinMarKetCap().subscribe(data => { this.cryptoMarketUSDandTHB = data },
+                      error => {console.log("error: "+error);},
+                        () => {console.log("Read qoute completely");})
+     
+
       this.isSelect=false;
   }
 
@@ -60,35 +42,35 @@ export class MarketsPage {
     }, 500);
   }
 
-  addName(){
-    for(let i=0;i<this.cryptoNumbers.length;i++){
-      this.cryptoMix[i]={ pairing_id:this.cryptoNumbers[i].pairing_id,
-                          primary_currency:this.cryptoNumbers[i].primary_currency,
-                          secondary_currency:this.cryptoNumbers[i].secondary_currency,
-                          change:this.cryptoNumbers[i].change,
-                          last_price:this.cryptoNumbers[i].last_price,
-                          volume_24hours:this.cryptoNumbers[i].volume_24hours,
-                          nameCrypto:this.cryptoName[i],
-                          orderbooks:this.cryptoNumbers[i].orderbooks}
-      console.log('Success '+i+'----- name :'+this.cryptoMix[i].nameCrypto);
-    }
+  
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad MarketsPage');
   }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad MarketsPage');
-
-  // }
-
   addFavorite(slidingItem: ItemSliding, crypto: any){
-    this.getCrypto.addFavoriteCrypto({pairing_id: crypto.pairing_id,
-                                      primary_currency:crypto.primary_currency,
-                                      secondary_currency:crypto.secondary_currency,
-                                      change:crypto.change,
-                                      last_price:crypto.last_price,
-                                      volume_24hours:crypto.volume_24hours,
-                                      nameCrypto:crypto.nameCrypto,
-                                      orderbooks:crypto.orderbooks}) ;
-    console.log('addFavorite : '+crypto.nameCrypto);
+
+    // let price : number = +crypto.price_thb.toFixed(2);
+    console.log('parseInt '+parseFloat(crypto.price_thb).toFixed(2) );
+    this.getCrypto.addFavoriteCrypto({id: crypto.id,
+                                      name:crypto.name,
+                                      symbol:crypto.symbol,
+                                      rank:crypto.rank,
+                                      price_usd:crypto.price_usd,
+                                      price_btc:crypto.price_btcs,
+                                      h24_volume_usd:crypto.h24_volume_usd,
+                                      market_cap_usd:crypto.market_cap_usd,
+                                      available_supply:crypto.available_supply,
+                                      total_supply:crypto.total_supply,
+                                      percent_change_1h:crypto.percent_change_1h,
+                                      percent_change_24h:crypto.percent_change_24h,  
+                                      percent_change_7d:crypto. percent_change_7d,
+                                      last_updated:crypto.last_updated,
+                                      price_thb:parseFloat(crypto.price_thb).toFixed(2),
+                                      h24_volume_thb:crypto.h24_volume_thb,
+                                      market_cap_thb:crypto.market_cap_thb,
+                                    }) ;
+    // console.log(price.toFixed(2));
+    console.log('addFavorite : '+crypto.name);
     slidingItem.close();
 
   }
@@ -101,39 +83,42 @@ export class MarketsPage {
     loader.present();
   }
 
+
+  searchCrypto(event){
+    if (event.target.value){
+      if (event.target.value.length>1){
+        let filteredJson = this.cryptoMarketUSDandTHB.filter( row => { 
+              if ((row.symbol.indexOf(event.target.value) != -1) || (row.name.indexOf(event.target.value)!= -1)) {
+                return true;
+            } else {
+                return false ;
+              }
+        });
+        this.isfiltered = true ;
+        this.filteredCrypto = filteredJson ;
+      } else {
+        this.isfiltered = false ;
+      }
+    } else {
+      this.isfiltered = false ;
+    }
+  }
+
+  clearQuotes(event) {
+    event.target.value="" ;
+  }
+
   selectThb(){
-       if (this.cryptoMix.length>-1){
-         let filteredTHB = this.cryptoMix.filter( row => { 
-            if (row.primary_currency=='THB') {
-                 return true;
-             }else {
-                 return false ;
-               }
-         });
          this.isSelect=false;
-         console.log('FilterTHB : '+filteredTHB) ;
-        this.THB = filteredTHB ;
-       }else {
-        console.log('No data') ;
-       }
   }
 
 
   selectBtc(){
-       if (this.cryptoMix.length>-1){
-         let filteredBTC = this.cryptoMix.filter( row => { 
-             if (row.primary_currency=='BTC') {
-                 return true;
-             }else {
-                 return false ;
-               }
-         });
          this.isSelect=true;
-         console.log('FilterBTC : '+filteredBTC) ;
-         this.BTC = filteredBTC ;
-       } else {
-         console.log('No data') ;
-       }
+  }
+
+  decimalFormat(crypto){
+     this.decimalPriceCrypto.push()
   }
   
 }

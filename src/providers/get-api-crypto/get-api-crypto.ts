@@ -23,36 +23,31 @@ for (let i = 1 ; i <= 27; i++) {
 
 @Injectable()
 export class GetApiCryptoProvider {
-// imgeUrl : string = 'https://d2v7vc3vnopnyy.cloudfront.net/img/coins';
-
-	// nameCrypto:any[]=["Bitcoin","Litecoin","Namecoin","Dogcoin",
-	// 				"Peercoin","Feathercoin","Primecoin","Zcash",
-	// 				"HyperStake","Pandacoin","Cryptonite","Paycoin",
-	// 				"Quark","Ethereum","Ethereum","Dash","Augur","Gnosis",
-	// 				"Ripple","OmiseGo","BitcoinCash"];
-	favoriteCrypto:crytoWithName[]=[] ;
+	favoriteCrypto:objectCoinMarKetCap[]=[] ;
 	constructor(public alertCtrl: AlertController,public http: Http) {
 
 	console.log('Hello GetApiCryptoProvider Provider');
 
+
 	}
 
-	loadBX():Observable<cryptoNumbers[]>{
-	  	return this.http.get("/api")
+
+	loadCoinMarKetCap():Observable<objectCoinMarKetCap[]>{
+	  	return this.http.get("https://api.coinmarketcap.com/v1/ticker/?convert=THB&limit=100")
 	  			   .map(response => {
 	  			   		return response.json()
 	  			   });
 	}
 
-	addFavoriteCrypto(cryto: crytoWithName){
+	addFavoriteCrypto(cryto: objectCoinMarKetCap){
 		let success = this.alertCtrl.create({
 	        title: 'Successful!',
-	        subTitle: 'Save " '+cryto.secondary_currency+' " in your favorites',
+	        subTitle: 'Save " '+cryto.name+' " in your favorites',
 	    });
 
 	    let unsuccess = this.alertCtrl.create({
 	        title: 'Already!',
-	        subTitle: '" '+cryto.secondary_currency+' " already in your favorites yet',
+	        subTitle: '" '+cryto.name+' " already in your favorites yet',
 	    });
 
 		if(this.favoriteCrypto.length==0){
@@ -66,7 +61,7 @@ export class GetApiCryptoProvider {
 			for(let i=0;i<this.favoriteCrypto.length;i++){
 				console.log('['+i+']'+' lenth('+this.favoriteCrypto.length)+')';
 				
-				if(this.favoriteCrypto[i].pairing_id!=cryto.pairing_id){
+				if(this.favoriteCrypto[i].id!=cryto.id){
 					console.log('ไม่ซ้ำ');
 					if(i==this.favoriteCrypto.length-1){
 						console.log('Successful');
@@ -92,11 +87,11 @@ export class GetApiCryptoProvider {
 		}
 	}
 
-	getFavoriteCrypto(): cryto[] {
+	getFavoriteCrypto(): objectCoinMarKetCap[] {
 	    return this.favoriteCrypto ;
 	}
 
-	removeFavoriteCrypto(cryto: crytoWithName){
+	removeFavoriteCrypto(cryto: objectCoinMarKetCap){
 		let index = this.favoriteCrypto.indexOf(cryto);
 		if (index > -1){
 			this.favoriteCrypto.splice(index,1);
@@ -105,47 +100,24 @@ export class GetApiCryptoProvider {
 
 }
 
-export class bids{
-	total:any
-	volume:any
-	highbid:any
-}
-export class asks{
-	total:any
-	volume:any
-	highbid:any
-}
-export class orderbook{
-	bids : bids[]
-	asks : asks[]
-}
-export class cryto{
-	pairing_id:any
-	primary_currency:any
-	secondary_currency:any
-	change:number
-	last_price:string
-	volume_24hours:any
-	orderbooks:orderbook[]
-}
-export class cryptoNumbers{
-	// number:string='1';
-	crytos:cryto[]
-}
+export class objectCoinMarKetCap{
+	id:any;
+	name:any;
+	symbol:any;
+	rank:any;
+	price_usd:number;
+	price_btc:number;
+	h24_volume_usd:any;
+	market_cap_usd:any;
+	available_supply:any;
+	total_supply:any;
+	percent_change_1h:any;
+	percent_change_24h:any;
+	percent_change_7d:any;
+	last_updated:any;
+	price_thb:number;
+	h24_volume_thb:any;
+	market_cap_thb:any;
 
-export const NAME:any[] = ["Bitcoin","Litecoin","Namecoin","Dogcoin",
-					"Peercoin","Feathercoin","Primecoin","Zcash",
-					"HyperStake","Pandacoin","Cryptonite","Paycoin",
-					"Quark","Ethereum","Ethereum","Dash","Augur","Gnosis",
-					"Ripple","OmiseGo","BitcoinCash"];
 
-export class crytoWithName{
-	pairing_id:any
-	primary_currency:any
-	secondary_currency:any
-	change:number
-	last_price:string
-	volume_24hours:any
-	nameCrypto:any
-	orderbooks:orderbook[]
 }

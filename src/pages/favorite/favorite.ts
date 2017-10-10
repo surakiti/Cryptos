@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams ,ItemSliding } from 'ionic-angular';
+import { Component,ItemSliding } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { GetApiCryptoProvider} from '../../providers/get-api-crypto/get-api-crypto';
 
 /**
@@ -29,4 +29,5 @@ favoriteCryptos:any[];
     slidingItem.close();
 
   }
+
 }

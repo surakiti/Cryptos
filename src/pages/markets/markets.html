@@ -19,12 +19,11 @@
         THB
       </ion-segment-button>
       <ion-segment-button value="btc" (click)="selectBtc()">
-        BTC
+        USD
       </ion-segment-button>
     </ion-segment>
-
 <!-- </ion-toolbar> -->
-
+<ion-searchbar (ionInput)="searchCrypto($event)"></ion-searchbar>
 </ion-header>
 
 
@@ -33,127 +32,65 @@
 
 <ion-content padding class="dark">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content>
-    	<ion-list *ngIf="!isSelect" style="margin-top:-17px">
-		
- 		<ion-item *ngFor="let crypto of THB"  class="dark">
-
-			<ion-avatar item-start>
-			<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
-					
-						{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
-						
-				<span class="Green">
-						<span [ngClass]="{rateCurrency:crypto.change<0}">
-								<span class="letfs">{{crypto.last_price}}</span>
-								
-						</span>
-				</span>
-
-							<br>
-
-				<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
-
-							<p class="Green" >
-								<span [ngClass]="{rateCurrency:crypto.change<0}">
-										{{crypto.change}}%
-									</span>
-							</p>
-
-		</ion-item>
-	</ion-list>
-
-===================================================================================
-
-	<ion-list *ngIf="isSelect" style="margin-top:-17px" >
-		<span></span>
- 		<ion-item *ngFor="let crypto of BTC" class="dark">
- 			<ion-avatar item-start>
-			<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
-							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
-						
-				<span class="Green" >
-						<span [ngClass]="{rateCurrency:crypto.change<0}">
-							{{crypto.last_price}}
-										
-						</span>
-				</span>
-
-						<br>
-			<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
-						<p class="Green">
-								<span [ngClass]="{rateCurrency:crypto.change<0}">
-											{{crypto.change}}%
-								</span>
-						</p>
-							
-										
- 		</ion-item>
- 	</ion-list>
-    </ion-refresher-content>
-  </ion-refresher> -->
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<ion-list *ngIf="!isSelect" style="margin-top:-17px">
-		<ion-item-sliding #slidingItem *ngFor="let crypto of THB">
+	<ion-list *ngIf="(!isSelect) && (!isfiltered)" style="margin-top:-17px" class="positionList">
+		<ion-item-sliding #slidingItem *ngFor="let crypto of cryptoMarketUSDandTHB">
 			<ion-item class="dark">
 				
-				<ion-avatar item-start>
-				<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
+			<span class="s-s-{{crypto.id}} currency-logo-sprite" style="margin-right:10px;"></span>
 						
-							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
+							{{crypto.symbol}}/THB
 							
 					<span class="Green">
-							<span [ngClass]="{rateCurrency:crypto.change<0}">
-									<span class="letfs">{{crypto.last_price}}</span>
+							<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+									<span>{{crypto.price_thb}}
+										<span class="whiteCharge">THB</span>
+									</span>
 									
 							</span>
 					</span>
 
 								<br>
 
-					<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
+					<span class="nameCoinsSet">{{crypto.name}}</span>
+
+					<p class="Green">
+						<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+							<span class="whiteCharge">Volum:</span> {{crypto.percent_change_1h}}%
+						</span>
+					</p>
+
+	 	 	</ion-item>
+
+	 	 	<ion-item-options side="right" class="dark">
+			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" style="background:#CC6666">
+			 	 			<ion-icon name="ios-heart"></ion-icon>
+			 	 		</button>
+		 	 </ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+
+	<ion-list *ngIf="(!isSelect) && (isfiltered)" style="margin-top:-17px" class="left">
+		<ion-item-sliding #slidingItem *ngFor="let crypto of filteredCrypto">
+			<ion-item class="dark">
+				
+			<span class="s-s-{{crypto.id}} currency-logo-sprite"></span>
+						
+							{{crypto.symbol}}/THB
+							
+					<span class="Green">
+							<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+									<span>{{crypto.price_thb}} <span class="whiteCharge">THB</span></span>
+									
+							</span>
+					</span>
+
+								<br>
+
+					<span class="nameCoinsSet">{{crypto.name}}</span>
 
 								<p class="Green" >
-									<span [ngClass]="{rateCurrency:crypto.change<0}">
-											{{crypto.change}}%
+									<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+											<span class="whiteCharge">Volum:</span> {{crypto.percent_change_1h}}%
 										</span>
 								</p>
 
@@ -163,48 +100,84 @@
 			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" style="background:#CC6666">
 			 	 			<ion-icon name="ios-heart"></ion-icon>
 			 	 		</button>
-		 	 		</ion-item-options>
+		 	 </ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
 
 
-<!-- =================================================================================== -->
+<!-- USD -->
 
-	<ion-list *ngIf="isSelect" style="margin-top:-17px" >
-		<ion-item-sliding #slidingItem *ngFor="let crypto of BTC">
+	<ion-list *ngIf="(isSelect) && (!isfiltered)" style="margin-top:-17px" class="positionList">
+		<ion-item-sliding #slidingItem *ngFor="let crypto of cryptoMarketUSDandTHB">
 			<ion-item class="dark">
 				
-				<ion-avatar item-start>
-				<img src="https://d2v7vc3vnopnyy.cloudfront.net/img/coins/{{ crypto.secondary_currency }}.png" /></ion-avatar>
+			<span class="s-s-{{crypto.id}} currency-logo-sprite" style="margin-right:10px;"></span>
 						
-							{{ crypto.secondary_currency }}/{{crypto.primary_currency}}
+							{{crypto.symbol}}/USD
 							
 					<span class="Green">
-							<span [ngClass]="{rateCurrency:crypto.change<0}">
-									<span class="letfs">{{crypto.last_price}}</span>
+							<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+									<span>{{crypto.price_usd}} 
+										<span class="whiteCharge">USD</span>
+									</span>
 									
 							</span>
 					</span>
 
 								<br>
 
-					<span class="nameCoinsSet">{{crypto.nameCrypto}}</span>
+					<span class="nameCoinsSet">{{crypto.name}}</span>
+
+					<p class="Green">
+						<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+							<span class="whiteCharge">Volum:</span> {{crypto.percent_change_1h}}%
+						</span>
+					</p>
+
+	 	 	</ion-item>
+
+	 	 	<ion-item-options side="right" class="dark">
+			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" style="background:#CC6666">
+			 	 			<ion-icon name="ios-heart"></ion-icon>
+			 	 		</button>
+		 	 </ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+
+	<ion-list *ngIf="(isSelect) && (isfiltered)" style="margin-top:-17px" class="left">
+		<ion-item-sliding #slidingItem *ngFor="let crypto of filteredCrypto">
+			<ion-item class="dark">
+				
+			<span class="s-s-{{crypto.id}} currency-logo-sprite"></span>
+						
+							{{crypto.symbol}}/USD
+							
+					<span class="Green">
+							<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+									<span>{{crypto.price_usd}} <span class="whiteCharge">USD</span></span>
+									
+							</span>
+					</span>
+
+								<br>
+
+					<span class="nameCoinsSet">{{crypto.name}}</span>
 
 								<p class="Green" >
-									<span [ngClass]="{rateCurrency:crypto.change<0}">
-											{{crypto.change}}%
+									<span [ngClass]="{rateCurrency:crypto.percent_change_1h<0}">
+											<span class="whiteCharge">Volum:</span> {{crypto.percent_change_1h}}%
 										</span>
 								</p>
 
 	 	 	</ion-item>
 
-	 	 			<ion-item-options side="right" class="dark">
+	 	 	<ion-item-options side="right" class="dark">
 			 	 		<button ion-button icon-only (click)="addFavorite(slidingItem,crypto)" style="background:#CC6666">
 			 	 			<ion-icon name="ios-heart"></ion-icon>
 			 	 		</button>
-		 	 		</ion-item-options>
+		 	 </ion-item-options>
 		</ion-item-sliding>
- 	</ion-list>
+	</ion-list>
 
 
 </ion-content>

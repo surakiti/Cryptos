@@ -65,7 +65,8 @@ export class MarketsPage {
                                       percent_change_24h:crypto.percent_change_24h,  
                                       percent_change_7d:crypto. percent_change_7d,
                                       last_updated:crypto.last_updated,
-                                      price_thb:parseFloat(crypto.price_thb).toFixed(2),
+                                      price_thb:crypto.price_thb,
+                                      // price_thb:parseFloat(crypto.price_thb).toFixed(2),
                                       h24_volume_thb:crypto.h24_volume_thb,
                                       market_cap_thb:crypto.market_cap_thb,
                                     }) ;

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { GetApiCryptoProvider , cryptoNumbers ,cryto ,orderbook ,asks , bids , NAME,objectCoinMarKetCap} from '../../providers/get-api-crypto/get-api-crypto';
+import { GetApiCryptoProvider , objectCoinMarKetCap} from '../../providers/get-api-crypto/get-api-crypto';
 import _ from 'lodash';
 import { LoadingController ,ItemSliding ,AlertController } from 'ionic-angular';
+import { CryptoDetailPage } from '../crypto-detail/crypto-detail';
 /**
  * Generated class for the MarketsPage page.
  *
@@ -30,6 +31,10 @@ export class MarketsPage {
      
 
       this.isSelect=false;
+  }
+
+  goToDetial(param){
+    this.navCtrl.push(CryptoDetailPage,param);
   }
 
 

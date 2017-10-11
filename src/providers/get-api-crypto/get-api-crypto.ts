@@ -30,7 +30,14 @@ export class GetApiCryptoProvider {
 
 
 	}
-
+	loadTwitter(){
+		// let oembedResponse =  fetch(new Request('https://publish.twitter.com/oembed?url=https://twitter.com/jack/status/20'));
+		// let oembedTweet = oembedResponse.json();
+		return this.http.get("https://publish.twitter.com/oembed?url=https://twitter.com/search?f=tweets&vertical=default&q=%24KNC")
+	  			   .map(response => {
+	  			   		return response.json()
+	  			   });
+	}
 
 	loadCoinMarKetCap():Observable<objectCoinMarKetCap[]>{
 	  	return this.http.get("https://api.coinmarketcap.com/v1/ticker/?convert=THB&limit=100")
@@ -121,3 +128,4 @@ export class objectCoinMarKetCap{
 
 
 }
+

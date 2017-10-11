@@ -1,4 +1,4 @@
-<!--
+  <!--
   Generated template for the MarketsPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
@@ -34,7 +34,7 @@
 
 	<ion-list *ngIf="(!isSelect) && (!isfiltered)" style="margin-top:-17px" class="positionList">
 		<ion-item-sliding #slidingItem *ngFor="let crypto of cryptoMarketUSDandTHB">
-			<ion-item class="dark">
+			<ion-item class="dark" (click)="goToDetial(crypto)">
 				
 			<span class="s-s-{{crypto.id}} currency-logo-sprite" style="margin-right:10px;"></span>
 						

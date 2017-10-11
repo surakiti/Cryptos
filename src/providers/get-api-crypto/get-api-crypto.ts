@@ -114,7 +114,7 @@ export class objectCoinMarKetCap{
 	rank:any;
 	price_usd:number;
 	price_btc:number;
-	h24_volume_usd:any;
+	_24h_volume_usd:any;
 	market_cap_usd:any;
 	available_supply:any;
 	total_supply:any;

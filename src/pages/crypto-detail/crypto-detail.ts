@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ItemSliding  } from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
 import { GetApiCryptoProvider } from '../../providers/get-api-crypto/get-api-crypto';
 /**

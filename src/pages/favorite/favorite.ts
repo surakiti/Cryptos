@@ -1,4 +1,5 @@
-import { Component,ItemSliding } from '@angular/core';
+import { Component,ItemSliding  } from '@angular/core'; 
+// delete import { Component,ItemSliding } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GetApiCryptoProvider} from '../../providers/get-api-crypto/get-api-crypto';
 

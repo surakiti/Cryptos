@@ -7,8 +7,8 @@
 <ion-header style="text-align: center;"> 
   <ion-navbar color="dark" >
     <ion-title>Chats</ion-title>
-    <ion-buttons  end >
- 		<button ion-button class="iconUser" (click)="editUsername()">
+    <ion-buttons  start >
+ 		<button ion-button menuToggle class="iconUser">
  	 	 	<ion-icon name="ios-contact"></ion-icon>
  		</button>
  	</ion-buttons>
@@ -27,18 +27,18 @@
 			</ion-item>
 		</ion-list>
 	
-
-	<!-- <form [formGroup]="sendMessage";"> -->
 </ion-content>
 <ion-footer>
-	 	<ion-toolbar color="dark">
-	    	<span class="username">{{username}}</span><br>
-		    	<input #input placeholder="Your message.."[(ngModel)]="message" />
-		    	<ion-buttons end (click)="addChatting(username,message)">
-			      	<button>
-			        	<ion-icon name="send"></ion-icon>
-			    	</button>
-	    		</ion-buttons>
-
-  		</ion-toolbar>
+	<ion-toolbar color="dark">
+		<span class="username" (click)="editUsername()"> <b>{{username}} </b></span><br>
+		<form [formGroup]="sendMessage"
+		      (ngSubmit)="saveMsg()">
+		    <input placeholder="Your message.."[(ngModel)]="message" formControlName="message" />
+		   
+			    <button end type="submit">
+			       	<ion-icon name="send"></ion-icon>
+			   	</button>
+		</form>
+	<span class="error"> {{errorMessage}} </span>
+</ion-toolbar>
 </ion-footer> 

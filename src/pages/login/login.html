@@ -7,24 +7,29 @@
 <ion-header>
 
   <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content paddingv class="dark">
-	<ion-item class="dark" >
-    	<ion-label floating>Username</ion-label>
-    	<ion-input></ion-input>
-  	</ion-item >
-
+<ion-content padding class="dark">
+  <form [formGroup]="loginForm" (ngSubmit)="signIn()">
   	<ion-item class="dark">
-    	<ion-label floating>Password</ion-label>
-    	<ion-input type="password"></ion-input>
-  	</ion-item>
-  	<br><br>
-  	<button ion-button block color="danger"(click)="goToHomePage()" >Sign In</button>
-  	<button ion-button block color="danger"(click)="goToSignUp()">Sign Up</button>
+      	<ion-label fixed>Username</ion-label>
+      	<ion-input type="text" [(ngModel)]="username" formControlName="username" >
+        </ion-input>
+    	</ion-item >
+
+    	<ion-item class="dark">
+      	<ion-label fixed>Password</ion-label>
+      	<ion-input type="password" [(ngModel)]="password" formControlName="password" ></ion-input>
+    	</ion-item>
+    	<br><br>
+    	<button type="submit" ion-button block color="danger">
+        Sign In
+      </button>
+    </form>
+    	<button ion-button block color="primary" (click)="goToSignUp()">Sign Up</button>
 </ion-content>
 

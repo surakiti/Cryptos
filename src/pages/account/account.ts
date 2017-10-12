@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,AlertController,ModalController} from 'ionic-angular';
+import { FavoritePage } from '../favorite/favorite';
+import { ChangePasswordPage } from '../change-password/change-password';
 
 /**
  * Generated class for the AccountPage page.
@@ -13,13 +15,59 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'account.html',
 })
 export class AccountPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	phone:any ='Set Phone';
+	account:any = {username:'',password:'',email:''};
+  constructor(public alertCtrl: AlertController,
+  			  public navCtrl: NavController,
+  			  public navParams: NavParams,
+  			  public modalCtrl: ModalController) {
+  	this.account={username:navParams.get('username'),password:navParams.get('password'),email:'example@hotmail.com'};
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
   }
+
+  goToFavorite(){
+  	this.navCtrl.push(FavoritePage);
+  }
+
+  changePassword(){
+  	let modal = this.modalCtrl.create(ChangePasswordPage);
+    modal.present();
+  }
   
+
+  setPhone(){
+  	let prompt = this.alertCtrl.create({
+	      title: 'Phone',
+	      message: "Please provide a phone.",
+	      inputs: [
+	        {
+	          name: 'phone',
+	          placeholder: 'Phone number'
+	        }
+	      ],
+	      buttons: [
+	        {
+	          text: 'Cancel',
+	          handler: data => {
+	            console.log('Cancel clicked');
+	          }
+	        },
+	        {
+	          text: 'Save',
+	          handler: data => {
+	            console.log('Saved clicked');
+	            this.phone = data.phone;
+	            console.log('Data '+data.phone);
+	            
+	          }
+	        }
+	      ]
+	    });
+
+	    prompt.present();
+  }
 
 }

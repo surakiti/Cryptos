@@ -7,25 +7,41 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>register</ion-title>
+    <ion-title>Register</ion-title>
+    <ion-buttons end >
+      <button ion-button icon-right (click)="goToSignIn()">
+        <ion-icon name="ios-close-circle"></ion-icon>
+      </button>
+  </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding class="dark">
-	<ion-item class="dark">
-   	 	<ion-label fixed>Username</ion-label>
-    	<ion-input type="text" [(ngModel)]="username"></ion-input>
-  </ion-item>
-  <ion-item class="dark">
-   	 	<ion-label fixed>E-mail</ion-label>
-    	<ion-input type="email" value=""></ion-input>
-  </ion-item>
-  <ion-item class="dark">
-   	 	<ion-label fixed>Password</ion-label>
-    	<ion-input type="password" value=""></ion-input>
-  </ion-item>
-  <br>
-  <button ion-button block (click)="showAlert()">Sign Up</button>
+<ion-content padding class="dark" >
+  <form [formGroup]="regisForm" (ngSubmit)="signUp()">
+  	<ion-item class="dark positionForm">
+     	 	<ion-label fixed class='fixedLabel'>Username</ion-label>
+      	<ion-input type="text" [(ngModel)]="username" formControlName="username" ></ion-input>
+    </ion-item>
+
+    <ion-item class="dark positionForm">
+     	 	<ion-label fixed class='fixedLabel'>E-mail</ion-label>
+      	<ion-input type="email" [(ngModel)]="email" formControlName="email"></ion-input>
+    </ion-item>
+
+
+    <ion-item class="dark positionForm">
+     	 	<ion-label fixed class='fixedLabel'>Password</ion-label>
+      	<ion-input type="password" [(ngModel)]="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item class="dark positionForm">
+        <ion-label fixed class='fixedLabel'>Re-Password</ion-label>
+        <ion-input type="password" formControlName="rePassword"></ion-input>
+    </ion-item>
+
+    <br>
+    <button ion-button block type="submit">Sign Up</button>
+  </form>
 </ion-content>

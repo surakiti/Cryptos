@@ -1,6 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams,AlertController} from 'ionic-angular';
-// import { FormBuilder, FormGroup ,Validators } from '@angular/forms' 
+import { NavController, NavParams,AlertController,MenuController} from 'ionic-angular';
+import { FormBuilder, FormGroup ,Validators } from '@angular/forms' 
 import { Content } from 'ionic-angular';
 
 /**
@@ -21,7 +21,23 @@ export class ChatPage {
 	chattingNew : chatting[];
 	username:string = 'User1032';
 	message:string;
-  	constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+	errorMessage:string='';
+	sendMessage:FormGroup;
+
+	pages: any[];
+   
+  	constructor(public builder:FormBuilder ,
+  				public alertCtrl: AlertController,
+  				public navCtrl: NavController, 
+  				public navParams: NavParams,
+  				public menu: MenuController) {
+
+  		this.pages = ['Home','List'];
+    	menu.enable(true);
+  		this.sendMessage = this.builder.group({
+  			'message':['',Validators.required]
+  		});
+
   		this.chatting = [{username:'Sommestake',message:'LOL and merchants revenue also counts, what a scam'}
   						 	]
   		this.chattingNew = [{username:'Glorious King',message:'COSS is beating all odds'},
@@ -52,11 +68,12 @@ export class ChatPage {
     	this.autoChatting();
   	}
 
-  	addChatting(username:string,message:string){
-  		this.chatting.push({username:username,message:message});
-  		console.log('addChatting');
-  		this.message = '';
-  		this.content.scrollToBottom(0);
+  	addChatting(username:string,message:any){
+  			console.log('Message : '+message.message);
+	  		this.chatting.push({username:username,message:message.message});
+	  		console.log('addChatting');
+	  		this.content.scrollToBottom(0);
+			this.message = '';
 
   	}
 
@@ -91,14 +108,45 @@ export class ChatPage {
 	          text: 'Save',
 	          handler: data => {
 	            console.log('Saved clicked');
-	            this.username = data.newUsername;
+	            if(data.newUsername){
+	            	this.username = data.newUsername;
+	            }
 	          }
 	        }
 	      ]
 	    });
 
 	    prompt.present();
+  	}
+
+
+  	validate(): any {
+  		let errorMsg : string ;
+  		if (this.sendMessage.valid){
+  			return true ;
   		}
+
+  		let controlMsg = this.sendMessage.controls['message'] ;
+  		if (controlMsg.invalid){
+	  		if (controlMsg.errors['required']){
+	  			errorMsg = 'Please provide a message.' ;
+	  		} 
+  		}
+
+  		this.errorMessage = errorMsg;
+  		return false ; 
+  	}
+
+    saveMsg() {
+    	this.errorMessage = '';
+	  	if(this.validate()){
+	  		let msgDetail = this.sendMessage.value ;
+	  		this.addChatting(this.username,msgDetail);
+	  	}else{
+	  		this.errorMessage = 'Please provide a message.';
+	  		console.log(this.errorMessage)
+	  	}
+  	}
 	
 }
 

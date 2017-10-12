@@ -16,14 +16,14 @@ import { AccountPage } from '../account/account';
 
 
 export class TabsPage {
-
-  tab1Root = MarketsPage;
-  tab2Root = FavoritePage;
-  tab3Root = ChatPage;
-  
-  tab4Root = LoginPage;
+  	tab1Root = MarketsPage;
+  	tab2Root = FavoritePage;
+  	tab3Root = ChatPage;
+  	tab4Root = LoginPage;
   
   constructor() {
 
   }
+
+
 }

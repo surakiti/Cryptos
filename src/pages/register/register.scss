@@ -1,8 +1,16 @@
 page-register {
-.dark{
+	.dark{
+	    color:#2E2E2E;
+	    background-color:#2E2E2E;
+	    color:white;
+  	}
+  	.fixedLabel {
+        min-width: 35% !important;
+        max-width: 35% !important;
+    }
+    .positionForm{
+    	margin-left:-2%;
+    	width:100%;
+    }
 
-    color:#2E2E2E;
-    background-color:#2E2E2E;
-    color:white;
-  }
 }

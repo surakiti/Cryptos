@@ -1,8 +1,43 @@
 page-account {
-.dark{
+	.dark{
+	    color:#2E2E2E;
+	    background-color:#2E2E2E;
+    	color:white;
+  	}
 
-    color:#2E2E2E;
-    background-color:#2E2E2E;
-    color:white;
-  }
+  	img {
+	  height: 40%;
+	  width: 40%;
+	  border-radius: 50%;
+	  display: inline-block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	.fixedLabel {
+        min-width: 50% !important;
+        max-width: 50% !important;
+        font-size:16px;
+    }
+    .labelDetail{
+    	font-size:12px;
+    	color:#696969;
+    	padding-left:10px;
+    	margin-left:-5%;
+    	text-align:right
+    }
+    .positionAccount{
+    	padding-left:7%;
+    	padding-top:1%;
+        margin-right:-10%;
+
+    }
+    .selectOption{
+    	text-align:right;
+    	float:right;
+    	margin-right:-20%;
+    	font-size:12px;
+    	color:#696969;
+    }
+
+	
 }

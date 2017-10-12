@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http' ;
 import { FormsModule } from '@angular/forms';
 
+import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MarketsPage } from '../pages/markets/markets';
 import { FavoritePage } from '../pages/favorite/favorite';
 import { ChatPage } from '../pages/chat/chat';
@@ -30,7 +31,8 @@ import { GetApiCryptoProvider } from '../providers/get-api-crypto/get-api-crypto
     RegisterPage,
     AccountPage,
     ProfilePage,
-    CryptoDetailPage
+    CryptoDetailPage,
+    ChangePasswordPage,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { GetApiCryptoProvider } from '../providers/get-api-crypto/get-api-crypto
     RegisterPage,
     AccountPage,
     ProfilePage,
-    CryptoDetailPage
+    CryptoDetailPage,
+    ChangePasswordPage
   ],
   providers: [
     StatusBar,

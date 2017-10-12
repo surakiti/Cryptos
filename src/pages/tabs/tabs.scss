@@ -15,3 +15,7 @@ $colors: (
 );
 
 }
+
+.tabs-ios-dark .tab-button[aria-selected=true], .tabs-ios-dark .tab-button[aria-selected=true] .tab-button-icon{
+    color: #FA5858;
+    }

@@ -7,8 +7,16 @@ page-chat {
   light:      orange,
   dark:       #2E2E2E,
   orange:      #FF4000,
+  yellow:     #FFCC00
  
   );
+
+  .menu.menu-left{
+  width: calc(100% - 70px) !important;
+  }
+.menu-open .menu-content{
+  transform: translate3d(calc(100% - 70px), 0px, 0px) !important;
+}
 
   .dark{
     color:#2E2E2E;
@@ -18,32 +26,29 @@ page-chat {
 
   .nameCoinsSet{
   	white-space: normal !important;
-   	/*max-width: none !important;    */
    	color:#A4A4A4;
     font-size:13px;
     padding-right: 14px;
   }
 
   input {
-    width: 97%;
+    width: 96%;
     box-sizing: border-box;
     border: 0px solid white,;
-    border-radius: 5px;
     font-size: 14px;
     background-color: #white; 
     padding: 8px 8px 8px 10px;
     color : #2E2E2E;
-    margin:2%;
-    margin-top:1%;
+
+    flex-grow:2;
+
   }
 
   button{
-	 background-color:white;
-	 border-radius: 5px;
-	 padding: 3.5px 6.5px 3.5px 6.5px;
+	 background-color:#FA5858;
+	 padding: 4px 7px 4px 7px;
 	 font-size:20px;
-	 margin-top:12px;
-	 margin-right:5px;
+	 
   }
 
   ion-footer{
@@ -63,6 +68,7 @@ page-chat {
   	color:white;
   	margin-left: 2.5%;
   	font-size: 15px;
+
   }
 
   .iconUser{
@@ -70,4 +76,18 @@ page-chat {
   	font-size:25px;
   }
 
+  .error{
+    color:#f53d3d;
+    font-size: 10px;
+    margin-left: 2.5%;
+  }
+
+  form{
+    display:flex;
+    margin: 2%;
+    margin-bottom: 0%;
+    margin-top: 1%;
+
+
+  }
 }

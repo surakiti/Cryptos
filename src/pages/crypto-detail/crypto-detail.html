@@ -15,5 +15,13 @@
 
 
 <ion-content padding class="dark">
-
+    <ion-item color="dark" href="#"><span >{{data.name}} ({{data.symbol}})</span></ion-item>
+    
+    <ion-item color="dark" href="#"><span class="fontShow">Rank: {{data.rank}}<span class="right">Price: {{data.price_thb}}/THB</span></span></ion-item>
+   
+    <ion-item color="dark" href="#"><span class="fontShow">MarketCap: {{data.market_cap_usd}}<span class="right">Chang1H: {{data.percent_change_1h}}</span></span></ion-item>
+   
+    <ion-item color="dark" href="#"><span class="fontShow">Chane24H: {{data.percent_change_24h}}<span class="right">Chane24H: {{data.percent_change_7d}}</span></span></ion-item>
+   
+    <ion-item color="dark" href="#"><span class="fontShow">Total: {{data.total_supply}}<span class="right">Type: {{data.symbol}}/THB</span></span></ion-item>
 </ion-content>

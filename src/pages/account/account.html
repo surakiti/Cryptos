@@ -6,91 +6,88 @@
 -->
 <ion-header>
 
-  <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>Account</ion-title>
-  </ion-navbar>
+	<ion-navbar color="dark" hideBackButton="true">
+		<ion-title>Account</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="dark">
 
-		<ion-item class="positionAccount">
-		    <ion-avatar item-start>
-		      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg" style="width: 60px; height: 60px;">
+	<ion-item class="positionAccount">
+		<!-- <ion-avatar item-start> -->
+		<img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg" style="width: 60px; height: 60px;">
+		<!-- </ion-avatar> -->
+		<h2 class="positionUsername">{{account.username}}</h2>
+		<p>Account ID : {{account.username}}Id</p>
+		<!-- <h2 class="positionUsername">account.username</h2>
+					<p>Account ID :account.usernameId</p>
+	 -->
+	</ion-item>
+	<br><br>
 
-		    </ion-avatar>
-		    <!-- <h2>namename</h2> -->
-		    <!-- <h2>{{account.username}}</h2>
-		    <p>Account ID :{{account.username}}Id</p> -->
-		    <h2>account.username</h2>
-		    <p>Account ID :account.usernameId</p>
+	<ion-list>
+		<button ion-item (click)="changePassword()">
+			<ion-label fixed class='fixedLabel'>
+				Change Password
+			</ion-label>
+		</button>
 
-		 </ion-item>
-		 <br>
+		<ion-item>
+			<ion-label fixed class='fixedLabel'>
+				Gender
+				<span *ngIf="gender===undefined" class='labelSet'>
+					[Set Gender]
+				</span>
+			</ion-label>
+			<ion-select style="margin-left: 20%;padding-top: 15px;padding-right: 9px;" class='labelDetail' [(ngModel)]="gender" interface="popover">
+				<ion-option value="Male" checked="true">Male</ion-option>
+				<ion-option value="Female">Female</ion-option>
+			</ion-select>
+		</ion-item>
 
-		 	<ion-list>
-				<button ion-item (click)="changePassword()">
-					<ion-label fixed class='fixedLabel'>
-						Change Password
-					</ion-label>
+		<ion-item>
+			<ion-label fixed class='fixedLabel'>
+				Birthday
+				<span *ngIf="birthday==undefined" class='labelSet'>
+					[Set Birthday]
+				</span>
+			</ion-label>
+			<ion-datetime [(ngModel)]="birthday" style="margin-left: 21%;" class='labelDetail' displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY"></ion-datetime>
+		</ion-item>
 
-				</button>
-				<ion-item>
-					<ion-label fixed class='fixedLabel'>
-						Gender
-					</ion-label>
-					<ion-label *ngIf="gender===undefined" class='labelDetail'>
-						Set Gender
-					</ion-label>
-					<ion-select class='labelDetail'[(ngModel)]="gender" interface="popover">
-					      <ion-option value="Male" checked="true" >Male</ion-option>
-					      <ion-option value="Female">Female</ion-option>
-					</ion-select>
-				</ion-item>
+		<ion-item (click)="setPhone()">
+			<ion-label fixed class='fixedLabel'>
+				Phone
+				<span *ngIf="phone===undefined" class='labelSet'>
+					[Set Phone]
+				</span>
+			</ion-label>
+			<ion-label class='labelDetail'>
+				{{phone}}
+			</ion-label>
+		</ion-item>
 
-				<button ion-item>
-					<ion-label fixed class='fixedLabel'>
-						Birthday
-					</ion-label>
-					<ion-label *ngIf="birthday==undefined" class='labelDetail'>
-						Set Birthday
-					</ion-label>
-					<ion-datetime [(ngModel)]="birthday" class='labelDetail' displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY"></ion-datetime>
-				</button>
+		<ion-item>
+			<ion-label fixed class='fixedLabel'>
+				Email
+			</ion-label>
+			<ion-label class='labelDetail'>
+				{{account.email}}
+			</ion-label>
+		</ion-item>
+	</ion-list>
 
-				<button ion-item (click)="setPhone()">
-					<ion-label fixed class='fixedLabel'>
-						Phone
-					</ion-label>
-					<ion-label class='labelDetail'>
-						{{phone}}
-					</ion-label>
-					
-				</button>
+	<button icon-left ion-item (click)="goToFavorite()">
+		<ion-icon name="ios-heart"></ion-icon> 
+		<span>My Favorites</span>
+	</button>
 
-				<button ion-item>
-					<ion-label fixed class='fixedLabel'>
-						Email
-					</ion-label>
-					<ion-label class='labelDetail'>
-						{{account.email}}
-					</ion-label>
-				</button>
+	<br>
 
-			</ion-list>
+	<button ion-button color="danger" block (click)="logOut()">
+		Log out
+	</button>
 
-
-
-		 	<ion-list>
-				<button ion-item (click)="goToFavorite()">
-					<ion-label fixed class='fixedLabel'>
-						My Favorites
-					</ion-label>
-				</button>
-			</ion-list>
-
-
-
-	
 </ion-content>

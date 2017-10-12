@@ -8,9 +8,16 @@
   <ion-content >
     <ion-list class="positionList">
       <ion-item menuClose *ngFor="let user of users" class="positionUser">
-          <ion-icon item-start name="ios-contact"></ion-icon>
+          <ion-icon color="secondary" item-start name="ios-contact"></ion-icon>
           <span class="userList">{{ user }}</span>
-        </ion-item>
+      </ion-item>
+    </ion-list>
+    <span class="Offline">Users Offline</span>
+    <ion-list class="positionList">
+      <ion-item menuClose *ngFor="let user of usersOffline" class="positionUser">
+          <ion-icon  item-start name="ios-contact"></ion-icon>
+          <span class="userList">{{ user }}</span>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>

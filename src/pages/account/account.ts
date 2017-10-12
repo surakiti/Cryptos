@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,AlertController,ModalController} from 'ionic-angular';
 import { FavoritePage } from '../favorite/favorite';
 import { ChangePasswordPage } from '../change-password/change-password';
-
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the AccountPage page.
  *
@@ -15,7 +15,7 @@ import { ChangePasswordPage } from '../change-password/change-password';
   templateUrl: 'account.html',
 })
 export class AccountPage {
-	phone:any ='Set Phone';
+	phone:any;
 	account:any = {username:'',password:'',email:''};
   constructor(public alertCtrl: AlertController,
   			  public navCtrl: NavController,
@@ -36,7 +36,10 @@ export class AccountPage {
   	let modal = this.modalCtrl.create(ChangePasswordPage);
     modal.present();
   }
-  
+	
+	logOut(){
+  	this.navCtrl.pop();
+  }
 
   setPhone(){
   	let prompt = this.alertCtrl.create({
